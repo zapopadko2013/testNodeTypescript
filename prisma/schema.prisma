@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id                              Int                   @id @default(autoincrement())
+  email                           String?               @unique
+  password                        String?
+  avatar                          String?
+  created_at                      DateTime              @default(now())
+  
+  // Relations
+  feedbeeks Feedback[]
+  comments Comment[]
+  upvots Upvot[]
+}
+
+model Feedback {
+  id             Int      @id @default(autoincrement())
+  title          String?
+  description    String?
+  category       String?  
+  status		     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user   User? @relation(fields: [author_id], references: [id])
+  author_id      Int?
+  
+  comments Comment[]
+  upvots Upvot[]
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  content    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  // Relations
+  user   User? @relation(fields: [author_id], references: [id])
+  author_id   Int?
+  
+  feedbeek   Feedback? @relation(fields: [post_id], references: [id])
+  post_id     Int?
+  
+  
+  parent_comment_id      Int?  @unique
+  succesor   Comment? @relation("BlogOwnerHistory",fields: [parent_comment_id], references: [id])
+  predecessor Comment? @relation("BlogOwnerHistory")
+  
+  
+  
+}
+
+model Upvot {
+  id         Int      @id @default(autoincrement())
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  user   User? @relation(fields: [author_id], references: [id])
+  author_id   Int
+  
+  feedbeek   Feedback? @relation(fields: [post_id], references: [id])
+  post_id     Int
+}
+
