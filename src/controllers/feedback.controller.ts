@@ -70,6 +70,8 @@ const getFeedbacks = async (req: Request, res: Response) => {
         description: true,
         category: true,
         status: true ,
+        createdAt: true ,
+        updatedAt: true ,
         user: {
           select: {
             id: true,

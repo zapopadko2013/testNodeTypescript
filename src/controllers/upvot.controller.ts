@@ -145,19 +145,3 @@ export default {
 };
 
 
-/* // or
-const usersWithPosts = await prisma.user.findMany({
-  select: {
-    id: true,
-    email: true,
-    posts: {
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        author_id: true,
-        created_at: true
-      }
-    }
-  }
-}) */

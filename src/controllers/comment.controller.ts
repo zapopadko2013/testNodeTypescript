@@ -59,6 +59,8 @@ const getComments = async (req: Request, res: Response) => {
       select: {
         id: true,
         content: true,
+        createdAt: true ,
+        updatedAt: true ,
         user: {
           select: {
             id: true,
