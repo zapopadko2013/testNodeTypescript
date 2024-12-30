@@ -39,5 +39,7 @@ router.get("/upvot/getf/:id", UpvotController.getUpvotF);
 router.get("/upvot/getu/:id", UpvotController.getUpvotU);
 router.get("/upvot/getcount/:id", UpvotController.getUpvotCount);
 
+// // ✅ export the router
+// module.exports = router;
 
 export default router;

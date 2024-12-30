@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../server";
 
+
 const userPost = async (req: Request, res: Response) => {
   try {
     // const { email, password,avatar } = req.body;
